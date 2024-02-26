@@ -13,10 +13,17 @@ file_path='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_100_co2.csv
 file_path2='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_co2-vidage.csv'
 file_path3='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_100_co2-2.csv'
 file_path4='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_co2-vidage-2.csv'
+file_path5='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_50_co2.csv'
+file_path6='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_co2-vidage-50.csv'
 db=pd.read_csv(file_path)
 db2=pd.read_csv(file_path2)
 db3=pd.read_csv(file_path3)
 db4=pd.read_csv(file_path4)
+db5=pd.read_csv(file_path5)
+db6=pd.read_csv(file_path6)
+
+
+
 plt.plot(db.index, db['Media value concentration']/100, label='Test_1 concentration')
 plt.plot(db2.index, db2['Media value concentration']/100, label = 'Test_1 emptying')
 
@@ -24,6 +31,12 @@ plt.xlabel('timestep')
 plt.ylabel('Concentration of CO2')
 plt.legend()
 plt.show()
+
+plt.plot(db5.index, db5['Media value concentration']/100, label='Test_3 concentration')
+plt.plot(db6.index, db6['Media value concentration']/100, label='Test_3 emptying')
+plt.legend()
+plt.show()
+
 
 plt.figure()
 plt.plot(db3.index, db3['Media value concentration']/100, label='Test_2 concentration')
