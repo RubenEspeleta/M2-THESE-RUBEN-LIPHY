@@ -8,6 +8,7 @@ Created on Mon Feb 26 15:48:30 2024
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from scipy.optimize import curve_fit
 
 file_path='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_100_co2.csv'
 file_path2='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_co2-vidage.csv'
@@ -15,35 +16,98 @@ file_path3='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_100_co2-2.
 file_path4='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_co2-vidage-2.csv'
 file_path5='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_50_co2.csv'
 file_path6='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_co2-vidage-50.csv'
+file_path7='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_100_co2-3.csv'
+file_path8='/home/ruben/M2-THESE-RUBEN-LIPHY/test_colonne_sans_mousse_co2-vidage-3.csv'
+
+
 db=pd.read_csv(file_path)
 db2=pd.read_csv(file_path2)
 db3=pd.read_csv(file_path3)
 db4=pd.read_csv(file_path4)
 db5=pd.read_csv(file_path5)
 db6=pd.read_csv(file_path6)
+db7=pd.read_csv(file_path7)
+db8=pd.read_csv(file_path8)
+
+### CO2 VIDANGE FUNCTION """"
+def func(x, a, b, c, phi):
+    return a*np.exp(-b*x+phi)+c
+
+
+#### CO2 REMPLISSAGE ####
+def func2(x, a, b, c, phi):
+    return -a*np.exp(-b*x+phi)+c
 
 
 
-plt.plot(db.index, db['Media value concentration']/100, label='Test_1 concentration')
-plt.plot(db2.index, db2['Media value concentration']/100, label = 'Test_1 emptying')
+### CO2 VIDANGE FIT 
+xdata=db8.index/2   #### TEST 4 VIDANGE
+popt, pcov=curve_fit(func, xdata, db8['Media value concentration']/100)#, bounds=(0, [75., 1., 0.5]))
+popt
 
+
+xdata2=db2.index/2  ### TEST 1 VIDANGE
+popt2, pcov2=curve_fit(func, xdata2, db2['Media value concentration']/100)#, bounds=(0, [75., 1., 0.5]))
+popt2
+
+xdata3=db4.index/2   ### TEST 2 VIDANGE
+popt3, pcov3=curve_fit(func, xdata3, db4['Media value concentration']/100)#, bounds=(0, [75., 1., 0.5]))
+popt3
+
+xdata4=db6.index/2   ### TEST 3 VIDANGE
+popt4, pcov4=curve_fit(func, xdata4, db6['Media value concentration']/100)#, bounds=(0, [75., 1., 0.5]))
+popt4
+
+#### CO2 REMPLISSAGE FIT
+xdata5=db7.index/2   #### TEST 4 REMPLISSAGE
+popt5, pcov5=curve_fit(func2, xdata5, db7['Media value concentration']/100)
+popt5
+
+
+
+
+
+
+###PLOTTING
+
+plt.figure()
+plt.scatter(db.index/2, db['Media value concentration']/100, label='Test_1 concentration', marker='o', s=2)
+plt.scatter(db2.index/2, db2['Media value concentration']/100, label = 'Test_1 emptying', marker='o', s=2)
+plt.plot(xdata2, func(xdata2, *popt2), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f ' % tuple(popt2))
+plt.xlabel('timestep')
+plt.ylabel('Concentration of CO2')
 plt.xlabel('timestep')
 plt.ylabel('Concentration of CO2')
 plt.legend()
 plt.show()
 
-plt.plot(db5.index, db5['Media value concentration']/100, label='Test_3 concentration')
-plt.plot(db6.index, db6['Media value concentration']/100, label='Test_3 emptying')
+
+
+plt.figure()
+plt.scatter(db5.index/2, db5['Media value concentration']/100, label='Test_3 concentration', marker='o', s=2)
+plt.scatter(db6.index/2, db6['Media value concentration']/100, label='Test_3 emptying', marker='o', s=2)
+plt.plot(xdata4, func(xdata4, *popt4), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f  ' % tuple(popt4))
 plt.legend()
 plt.show()
 
 
 plt.figure()
-plt.plot(db3.index, db3['Media value concentration']/100, label='Test_2 concentration')
-plt.plot(db4.index, db4['Media value concentration']/100, label='Test_2 emptying')
-
+plt.scatter(db3.index/2, db3['Media value concentration']/100, label='Test_2 concentration', marker='o', s=2)
+plt.scatter(db4.index/2, db4['Media value concentration']/100, label='Test_2 emptying', marker='o', s=2)
+plt.plot(xdata3, func(xdata3, *popt3), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f  ' % tuple(popt3))
 plt.xlabel('timestep')
 plt.ylabel('Concentration of CO2')
+plt.legend()
+plt.show()
+
+
+plt.figure()
+plt.scatter(db7.index/2, db7['Media value concentration']/100, label='Test_4 concentration', marker='o', s=2)
+plt.scatter(db8.index/2, db8['Media value concentration']/100, label='Test_4 emptying', marker='o', s=2)
+plt.plot(xdata, func(xdata, *popt), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f ' % tuple(popt))
+plt.plot(xdata5, func2(xdata5, *popt5), 'b-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f ' % tuple(popt5))
+plt.xlabel('Timestep')
+plt.ylabel('Concentration CO2')
 plt.legend()
 plt.show()
     
