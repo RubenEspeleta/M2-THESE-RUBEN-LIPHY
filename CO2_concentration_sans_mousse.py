@@ -36,7 +36,7 @@ def func(x, a, b, c, phi):
 
 #### CO2 REMPLISSAGE ####
 def func2(x, a, b, c, phi):
-    return -a*np.exp(-b*x+phi)+c
+    return a/(1+((a-c)/c)*np.exp(-b*x+phi))                             ######   a-a*np.exp(-b*x+phi)+c
 
 
 
@@ -63,9 +63,17 @@ xdata5=db7.index/2   #### TEST 4 REMPLISSAGE
 popt5, pcov5=curve_fit(func2, xdata5, db7['Media value concentration']/100)
 popt5
 
+xdata6=db.index/2   ### TEST 1 REMPLISSAGE
+popt6, pcov6=curve_fit(func2, xdata6, db['Media value concentration']/100)
+popt6
 
+xdata7=db3.index/2  ### TEST 2 REMPLISSAGE
+popt7, pcov7=curve_fit(func2, xdata7, db3['Media value concentration']/100)
+popt7
 
-
+xdata8=db5.index/2  ### TEST 3 REMPLISSAGE
+popt8, pcov8=curve_fit(func2, xdata8, db5['Media value concentration']/100)
+popt8
 
 
 ###PLOTTING
@@ -74,6 +82,7 @@ plt.figure()
 plt.scatter(db.index/2, db['Media value concentration']/100, label='Test_1 concentration', marker='o', s=2)
 plt.scatter(db2.index/2, db2['Media value concentration']/100, label = 'Test_1 emptying', marker='o', s=2)
 plt.plot(xdata2, func(xdata2, *popt2), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f ' % tuple(popt2))
+plt.plot(xdata6, func2(xdata6, *popt6), 'b-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f ' % tuple(popt6))
 plt.xlabel('timestep')
 plt.ylabel('Concentration of CO2')
 plt.xlabel('timestep')
@@ -87,6 +96,7 @@ plt.figure()
 plt.scatter(db5.index/2, db5['Media value concentration']/100, label='Test_3 concentration', marker='o', s=2)
 plt.scatter(db6.index/2, db6['Media value concentration']/100, label='Test_3 emptying', marker='o', s=2)
 plt.plot(xdata4, func(xdata4, *popt4), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f  ' % tuple(popt4))
+plt.plot(xdata8, func2(xdata8, *popt8), 'b-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f  ' % tuple(popt8))
 plt.legend()
 plt.show()
 
@@ -95,6 +105,7 @@ plt.figure()
 plt.scatter(db3.index/2, db3['Media value concentration']/100, label='Test_2 concentration', marker='o', s=2)
 plt.scatter(db4.index/2, db4['Media value concentration']/100, label='Test_2 emptying', marker='o', s=2)
 plt.plot(xdata3, func(xdata3, *popt3), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f  ' % tuple(popt3))
+plt.plot(xdata7, func2(xdata7, *popt7), 'b-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f, phi=%5.3f ' % tuple(popt7))
 plt.xlabel('timestep')
 plt.ylabel('Concentration of CO2')
 plt.legend()
