@@ -4,32 +4,14 @@
     "type": "split",
     "children": [
       {
-        "id": "330644497e6a7e4b",
+        "id": "af4626f2b2a40558",
         "type": "tabs",
         "children": [
           {
-            "id": "4e0136c9c28ebcec",
+            "id": "78d65fa2edd40667",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Welcome.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "a69b0d2feaca175f",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "28e3adbdcbbc11bd",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {}
             }
           }
@@ -99,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Welcome.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Welcome.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Welcome.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -157,11 +135,20 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "4e0136c9c28ebcec",
+  "active": "78d65fa2edd40667",
   "lastOpenFiles": [
-    "Welcome.md"
+    "Excalidraw/Modèle proposé par Cecile pour expliquer la diffusion, convection du CO2 dans l'air et l'inverse.md",
+    "Excalidraw/Drawing 2024-03-05 15.23.36.excalidraw.png",
+    "Excalidraw/Drawing 2024-03-05 15.23.36.excalidraw.md",
+    "Excalidraw/Drawing 2024-03-05 12.03.40.excalidraw.png",
+    "Excalidraw/Drawing 2024-03-05 12.03.40.excalidraw.md",
+    "Excalidraw/Drawing 2024-03-05 11.52.13.excalidraw.md",
+    "Excalidraw",
+    "Untitled.canvas",
+    "Untitled 1.canvas"
   ]
 }
